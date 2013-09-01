@@ -22,8 +22,8 @@ module ActiveAdmin
           chained_resource_route = [resource]
 
           resource_config = active_admin_config
-          while(resource_config.belongs_to?)
-            resource_config = active_admin_config.belongs_to_config.target
+          if(resource_config.belongs_to?)
+            resource_config = resource_config.belongs_to_config.target
             resource = resource.send(resource_config.resource_class_name.gsub(/^::/,"").downcase)
             chained_resource_route << resource
           end
